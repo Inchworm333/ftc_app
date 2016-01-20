@@ -10,10 +10,16 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.TouchSensor;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 
 public class ButtonColor extends OpMode {
 
+    //DcMotors for driving
+    DcMotor leftMotor1;
+    DcMotor leftMotor2;
+    DcMotor rightMotor1;
+    DcMotor rightMotor2;
 
     //Servo for Turning
     Servo buttonpusher;
@@ -36,9 +42,11 @@ public class ButtonColor extends OpMode {
         //logging color sensor hopefully
         hardwareMap.logDevices();
 
-        if (ColorOption == ""){
-            ColorOption = "red";
-        }
+        //defining motors
+        leftMotor1 = hardwareMap.dcMotor.get("motor_1");
+        leftMotor2 = hardwareMap.dcMotor.get("motor_2");
+        rightMotor1 = hardwareMap.dcMotor.get("motor_3");
+        rightMotor2 = hardwareMap.dcMotor.get("motor_4");
 
         //getting reference for color sensor (object)
         leftsensor = hardwareMap.colorSensor.get("leftsensor");
@@ -46,6 +54,11 @@ public class ButtonColor extends OpMode {
 
         //getting reference for button
         bigbutton = hardwareMap.touchSensor.get("bigbutton");
+
+        //Set default team red
+        if (ColorOption == ""){
+            ColorOption = "red";
+        }
 
         //Choose team color from button
         if (bigbutton.isPressed() && ColorOption == "red") {
