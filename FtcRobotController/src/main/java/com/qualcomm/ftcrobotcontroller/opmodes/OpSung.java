@@ -27,17 +27,17 @@ public class OpSung extends OpMode {
     @Override
     public void loop() {
         //values from gamepad
-        double frontleft = -gamepad1.left_stick_y;
-        double frontright = -gamepad1.right_stick_y;
-        double backleft = frontleft * 0.5;
-        double backright = frontright * 0.5;
+        double frontleft = -gamepad1.left_stick_y *0.7;
+        double frontright = -gamepad1.right_stick_y *0.7;
+        double backleft = frontleft * 0.7;
+        double backright = frontright * 0.7;
 
 
         //set motor power with gamepad
         leftMotor1.setPower(frontleft);
         rightMotor1.setPower(frontright);
 
-        rightMotor2.setPower(-backright);
-        leftMotor2.setPower(-backleft);
+        rightMotor2.setPower(backright);
+        leftMotor2.setPower(backleft);
     }
 }
