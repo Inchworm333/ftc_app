@@ -53,15 +53,20 @@ public class OpSung extends OpMode {
 
         //values from gamepad2 sliding//
         double slider_left = gamepad2.left_stick_y;
-        double slider_right = gamepad2.right_stick_y;
-        double slider_center = a
+        double slider_right = gamepad2.left_stick_y;
+        double slider_center = gamepad2.right_stick_y;
 
 
-        //set motor power with gamepad//
+        //set motor power with gamepad 1 for driving//
         leftMotor1.setPower(front_left);
         rightMotor1.setPower(front_right);
 
         leftMotor2.setPower(back_left);
         rightMotor2.setPower(back_right);
+
+        //set motor power with gamepad 2 for sliding//
+        sliderLeft.setPower(slider_left);
+        sliderRight.setPower(slider_right);
+        sliderCenter.setPower(slider_center);
     }
 }
