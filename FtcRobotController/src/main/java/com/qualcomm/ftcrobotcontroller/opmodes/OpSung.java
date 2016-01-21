@@ -56,6 +56,12 @@ public class OpSung extends OpMode {
         double slider_right = gamepad2.left_stick_y;
         double slider_center = gamepad2.right_stick_y;
 
+        //values for gamepad2 grabbing//
+        double grabber_left_right = gamepad2.left_trigger;
+        double grabber_center = gamepad2.right_trigger;
+        boolean grabber_left_right_reverse = gamepad2.left_bumper;
+        boolean grabber_center_reverse = gamepad2.right_bumper;
+
 
         //set motor power with gamepad 1 for driving//
         leftMotor1.setPower(front_left);
@@ -68,5 +74,21 @@ public class OpSung extends OpMode {
         sliderLeft.setPower(slider_left);
         sliderRight.setPower(slider_right);
         sliderCenter.setPower(slider_center);
+
+        //set servo power with gamepad 2 for grabbing//
+        if (grabber_left_right_reverse = false){
+            grabberLeft.setDirection(+);
+        }
+        while (grabber_left_right == 1){
+            grabberLeft.setPosition(+1);
+            grabberRight.setPosition(+1);
+        }
+        while (grabber_center == 1){
+            grabberCenter.setPosition(+1);
+        }
+        while (grabber_left_right_reverse){
+            grabberLeft.setDirection(-);
+
+        }
     }
 }
