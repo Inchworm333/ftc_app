@@ -74,21 +74,29 @@ public class OpSung extends OpMode {
         sliderLeft.setPower(slider_left);
         sliderRight.setPower(slider_right);
         sliderCenter.setPower(slider_center);
+        sliderLeft.setDirection(DcMotor.Direction.REVERSE);
 
         //set servo power with gamepad 2 for grabbing//
-        while (grabber_left_right > 0){
-            grabberLeft.setPosition(+1);
-            grabberRight.setPosition(+1);
+       /* while (grabber_left_right > 0){
+            grabberLeft.setPosition(1);
+            grabberRight.setPosition(0);
         }
         while (grabber_center > 0){
-            grabberCenter.setPosition(+1);
+            grabberCenter.setPosition(0);
         }
         while (grabber_left_right_reverse){
-            grabberLeft.setPosition(-1);
-            grabberRight.setPosition(-1);
+            grabberLeft.setPosition(0);
+            grabberRight.setPosition(1);
         }
         while (grabber_center_reverse){
-            grabberCenter.setPosition(-1);
+            grabberCenter.setPosition(0);
         }
+        /*while (grabber_left_right==0 && !grabber_left_right_reverse){
+            grabberLeft.setPosition(0.5);
+            grabberRight.setPosition(0.5);
+        }
+        while (grabber_center==0 && !grabber_center_reverse){
+            grabberCenter.setPosition(0.5);
+        }*/
     }
 }
