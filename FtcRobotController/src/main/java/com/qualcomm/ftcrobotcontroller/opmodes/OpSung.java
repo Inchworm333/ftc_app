@@ -19,6 +19,14 @@ public class OpSung extends OpMode {
     Servo grabberRight;
     Servo grabberCenter;
 
+    //grabber increment
+    double topgrabberadd = 0.1;
+    double bottomgrabberadd = 0.1;
+
+    //top grabber position
+    double topgrabber;
+    double bottomgrabber;
+
     @Override
     public void init() {
         //driving motors//
@@ -46,8 +54,8 @@ public class OpSung extends OpMode {
     @Override
     public void loop() {
         //values from gamepad1 driving//
-        double front_left = -gamepad1.left_stick_y *0.7;
-        double front_right = -gamepad1.right_stick_y *0.7;
+        double front_left = -gamepad1.left_stick_y * 0.7;
+        double front_right = -gamepad1.right_stick_y * 0.7;
         double back_left = front_left * 0.7;
         double back_right = front_right * 0.7;
 
@@ -77,26 +85,22 @@ public class OpSung extends OpMode {
         sliderLeft.setDirection(DcMotor.Direction.REVERSE);
 
         //set servo power with gamepad 2 for grabbing//
-       /* while (grabber_left_right > 0){
-            grabberLeft.setPosition(1);
-            grabberRight.setPosition(0);
+        while (grabber_left_right > 0) {
+            topgrabber += topgrabberadd;
         }
-        while (grabber_center > 0){
-            grabberCenter.setPosition(0);
+        while (grabber_center > 0) {
+            bottomgrabber += bottomgrabberadd;
         }
-        while (grabber_left_right_reverse){
-            grabberLeft.setPosition(0);
-            grabberRight.setPosition(1);
+        while (grabber_left_right_reverse) {
+            topgrabber -= topgrabberadd;
         }
-        while (grabber_center_reverse){
-            grabberCenter.setPosition(0);
+        while (grabber_center_reverse) {
+            bottomgrabber -= bottomgrabberadd;
         }
-        /*while (grabber_left_right==0 && !grabber_left_right_reverse){
-            grabberLeft.setPosition(0.5);
-            grabberRight.setPosition(0.5);
-        }
-        while (grabber_center==0 && !grabber_center_reverse){
-            grabberCenter.setPosition(0.5);
-        }*/
+
+        //send where grabber is to servo
+        grabberLeft.setPosition(topgrabber);
+        grabberRight.setPosition(-topgrabber);
+        grabberCenter.setPosition(bottomgrabber);
     }
 }

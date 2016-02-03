@@ -65,6 +65,7 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register ("OpSongMode", OpSongMode.class);
     manager.register ("OpSung", OpSung.class);
     manager.register ("ButtonColor", ButtonColor.class);
+    manager.register ("Mr Servo", TesterServo.class);
 
 
 
