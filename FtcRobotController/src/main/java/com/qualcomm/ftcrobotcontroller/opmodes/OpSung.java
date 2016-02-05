@@ -3,6 +3,7 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.Range;
 
 public class OpSung extends OpMode {
     //DC Motors//
@@ -19,13 +20,13 @@ public class OpSung extends OpMode {
     Servo grabberRight;
     Servo grabberCenter;
 
-    //grabber increment
-    double topgrabberadd = 0.1;
-    double bottomgrabberadd = 0.1;
-
     //top grabber position
     double topgrabber;
     double bottomgrabber;
+
+    //servo min max
+    final static double bottom_min = 0.20;
+    final static double bottom_max = 0.90;
 
     @Override
     public void init() {
@@ -48,6 +49,9 @@ public class OpSung extends OpMode {
         //reverse the left motors//
         leftMotor2.setDirection(DcMotor.Direction.REVERSE);
         rightMotor1.setDirection(DcMotor.Direction.REVERSE);
+
+        topgrabber = 0.5;
+        bottomgrabber = 0.2;
 
     }
 
@@ -84,23 +88,32 @@ public class OpSung extends OpMode {
         sliderCenter.setPower(slider_center);
         sliderLeft.setDirection(DcMotor.Direction.REVERSE);
 
-        //set servo power with gamepad 2 for grabbing//
-        while (grabber_left_right > 0) {
-            topgrabber += topgrabberadd;
-        }
-        while (grabber_center > 0) {
-            bottomgrabber += bottomgrabberadd;
-        }
-        while (grabber_left_right_reverse) {
-            topgrabber -= topgrabberadd;
-        }
-        while (grabber_center_reverse) {
-            bottomgrabber -= bottomgrabberadd;
-        }
-
         //send where grabber is to servo
         grabberLeft.setPosition(topgrabber);
-        grabberRight.setPosition(-topgrabber);
+        grabberRight.setPosition(topgrabber);
         grabberCenter.setPosition(bottomgrabber);
+        grabberRight.setDirection(Servo.Direction.REVERSE);
+
+        //clip bottom grabber servo
+        bottomgrabber = Range.clip(bottomgrabber, bottom_max, bottom_max);
+
+        //set servo power with gamepad 2 for grabbing//
+        if (grabber_left_right > 0) {
+            topgrabber = 1;
+        }
+        if (grabber_center > 0) {
+            bottomgrabber += 0.1;
+        }
+        if (grabber_left_right_reverse) {
+            topgrabber = 0;
+        }
+        if (grabber_center_reverse) {
+            bottomgrabber += 0.1;
+        }
+        if (gamepad2.left_trigger == 0 && gamepad2.left_bumper == false){
+            topgrabber = 0.5;
+        }
+
+
     }
 }
