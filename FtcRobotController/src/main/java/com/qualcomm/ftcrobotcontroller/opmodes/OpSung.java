@@ -95,7 +95,7 @@ public class OpSung extends OpMode {
         grabberRight.setDirection(Servo.Direction.REVERSE);
 
         //clip bottom grabber servo
-        bottomgrabber = Range.clip(bottomgrabber, bottom_max, bottom_max);
+        bottomgrabber = Range.clip(bottomgrabber, bottom_min, bottom_max);
 
         //set servo power with gamepad 2 for grabbing//
         if (grabber_left_right > 0) {
